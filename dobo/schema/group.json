@@ -1,0 +1,14 @@
+{
+  "connection": "memory",
+  "properties": [
+    "code::50:unique:true",
+    "name::50:true:true",
+    "remote::255",
+    "apiKey::255",
+    "dim::20",
+    "variant::50",
+    "mime::50",
+    "attributes:text"
+  ],
+  "feature": ["createdAt", "updatedAt"]
+}

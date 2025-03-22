@@ -1,0 +1,6 @@
+[{
+  "code": "osm",
+  "name": "OpenStreetMap",
+  "remote": "https://tile.openstreetmap.org/%s/%s/%s",
+  "attributes": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+}]

@@ -1,0 +1,6 @@
+[{
+  "code": "osm",
+  "name": "OpenStreetMap",
+  "groupId": "osm",
+  "local": "/osm/*/*/*.png"
+}]

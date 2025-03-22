@@ -1,0 +1,27 @@
+{
+  "connection": "memory",
+  "properties": [
+    "code::50:unique:true",
+    "name::50:true",
+    {
+      "name": "groupId",
+      "type": "string",
+      "maxLength": 50,
+      "rel": {
+        "group": {
+          "schema": "ProxyGroup",
+          "propName": "id",
+          "type": "one-to-one"
+        }
+      }
+    },
+    "local::255::true",
+    "remote::255",
+    "apiKey::255",
+    "dim::20",
+    "variant::50",
+    "mime::50",
+    "attributes:text"
+  ],
+  "feature": ["createdAt", "updatedAt"]
+}
