@@ -16,7 +16,7 @@ const proxy = {
       const isMatch = outmatch(m.local)
       return isMatch(url)
     })
-    if (!rec) throw this.error('_notFound')
+    if (!rec) throw this.error('_notFound', { noContent: true })
     const mapping = await recordGet('ProxyMapping', rec.id, { rels: ['group'] })
     const file = `${this.dir.data}/cache${url}`
     if (fs.existsSync(file)) return serveCached.call(this, { file, url, mapping, req, reply })
