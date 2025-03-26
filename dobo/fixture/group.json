@@ -1,6 +1,6 @@
 [{
   "code": "osm",
   "name": "OpenStreetMap",
-  "remote": "https://tile.openstreetmap.org/%s/%s/%s",
+  "remote": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   "attributes": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
 }]
