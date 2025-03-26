@@ -16,12 +16,20 @@
       }
     },
     "local::255::true",
+    "subDomains::20",
     "remote::255",
     "apiKey::255",
-    "dim::20",
+    "size::20",
     "variant::50",
     "mime::50",
     "attributes:text"
   ],
-  "feature": ["createdAt", "updatedAt"]
+  "feature": {
+    "createdAt": true,
+    "updatedAt": true,
+    "sumba.status": {
+      "values": ["ENABLED", "DISABLED"],
+      "default": "ENABLED"
+    }
+  }
 }

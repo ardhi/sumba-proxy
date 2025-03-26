@@ -1,6 +1,7 @@
 [{
   "code": "osm",
   "name": "OpenStreetMap",
+  "status": "ENABLED",
   "groupId": "?:ProxyGroup::code:osm",
   "local": "/osm/*/*/*.png"
 }]

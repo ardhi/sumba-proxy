@@ -5,13 +5,19 @@ async function factory (pkgName) {
     constructor () {
       super(pkgName, me.app)
       this.alias = 'proxy'
-      this.dependencies = ['bajo-extra', 'waibu-mpa', 'dobo']
+      this.dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba']
       this.config = {
         waibu: {
           title: 'Sumba Proxy',
           prefix: 'spx'
         }
       }
+    }
+
+    getSubDomains = (pattern = 'abc') => {
+      const { randomRange } = this.app.bajoExtra
+      const all = pattern.split('')
+      return all[randomRange(0, pattern.length - 1)]
     }
   }
 }
