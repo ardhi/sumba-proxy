@@ -4,6 +4,15 @@
     "code::50:unique:true",
     "name::50:true:true",
     "remote::255",
+    {
+      "name": "type",
+      "type": "string",
+      "maxLength": 20,
+      "index": true,
+      "required": true,
+      "default": "maptile"
+    },
+    "maxZoom:smallint",
     "subDomains::20",
     "apiKey::255",
     "size::20",

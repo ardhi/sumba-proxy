@@ -21,6 +21,8 @@
     "apiKey::255",
     "size::20",
     "variant::50",
+    "overlay:boolean",
+    "maxZoom:smallint",
     "mime::50",
     "attributes:text"
   ],

@@ -3,5 +3,6 @@
   "name": "OpenStreetMap",
   "status": "ENABLED",
   "remote": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  "maxZoom": 19,
   "attributes": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
 }]
