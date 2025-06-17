@@ -19,9 +19,10 @@ const proxy = {
     if (!rec) throw this.error('_notFound', { noContent: true })
     const mapping = await recordGet('ProxyMapping', rec.id, { rels: ['group'] })
     if (get(mapping, '_rel.group.status') !== 'ENABLED') throw this.error('_notFound', { noContent: true })
+    const cdn = mapping.cdn ?? get(mapping, '_rel.group.cdn')
     const file = `${this.dir.data}/cache${url}`
-    if (fs.existsSync(file)) return serveCached.call(this, { file, url, mapping, req, reply })
-    return serveFresh.call(this, { file, url, mapping, req, reply })
+    if (!fs.existsSync(file) || cdn) return serveFresh.call(this, { cdn, file, url, mapping, req, reply })
+    return serveCached.call(this, { file, url, mapping, req, reply })
   }
 }
 

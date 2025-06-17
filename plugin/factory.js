@@ -5,7 +5,7 @@ async function factory (pkgName) {
     constructor () {
       super(pkgName, me.app)
       this.alias = 'proxy'
-      this.dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba']
+      this.dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba', 'bajo-spatial']
       this.config = {
         waibu: {
           title: 'Sumba Proxy',

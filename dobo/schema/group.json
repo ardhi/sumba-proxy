@@ -15,6 +15,8 @@
     "maxZoom:smallint",
     "subDomains::20",
     "apiKey::255",
+    "cdn::255",
+    "cdnType::20",
     "size::20",
     "variant::50",
     "mime::50",
