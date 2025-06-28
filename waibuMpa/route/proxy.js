@@ -39,7 +39,7 @@ const proxy = {
       if (resp.ok) return reply.redirectTo(url)
     }
     const file = `${this.dir.data}/cache${url}`
-    if (!fs.existsSync(file) || cdn) return serveFresh.call(this, { file, url, mapping, reply, params, fname, ext })
+    if (!fs.existsSync(file)) return serveFresh.call(this, { file, url, mapping, reply, params, fname, ext })
     return serveCached.call(this, { file, url, mapping, reply })
   }
 }
