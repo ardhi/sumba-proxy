@@ -11,6 +11,7 @@ const proxy = {
     const { getTileLocation } = this.app.bajoSpatial.lib.anekaSpatial
     const { getMemdbStorage, recordGet } = this.app.dobo
     const { fetchUrl } = this.app.bajoExtra
+    const { callHandler } = this.app.bajo
     const mappings = filter(getMemdbStorage('ProxyMapping'), { status: 'ENABLED' })
 
     let url = req.url.split('?')[0]
@@ -31,16 +32,20 @@ const proxy = {
     const base = path.basename(last(params))
     const [fname, ext = ''] = base.split('.')
 
+    const assetType = mapping.assetType ?? get(mapping, '_rel.group.assetType')
     const cdn = mapping.cdn ?? get(mapping, '_rel.group.cdn')
     if (cdn) {
-      const type = mapping.cdnType ?? get(mapping, '_rel.group.cdnType', 'rtms')
-      const url = getTileLocation({ type, prefix: cdn, z: params[0], x: params[1], y: fname, format: isEmpty(ext) ? '' : `.${ext}` })
-      const resp = await fetchUrl(url, { method: 'HEAD' }, { rawResponse: true, cacheBuster: false })
+      const cdnType = mapping.cdnType ?? get(mapping, '_rel.group.cdnType', 'yxz')
+      let cdnUrl = `${cdn}${url}`
+      if (['yxz', 'zxy'].includes(cdnType)) cdnUrl = getTileLocation({ type: cdnType, prefix: cdn, z: params[0], x: params[1], y: fname, format: isEmpty(ext) ? '' : `.${ext}` })
+      const resp = await fetchUrl(cdnUrl, { method: 'HEAD' }, { rawResponse: true, cacheBuster: false })
       if (resp.ok) return reply.redirectTo(url)
     }
-    const file = `${this.dir.data}/cache${url}`
-    if (!fs.existsSync(file)) return serveFresh.call(this, { file, url, mapping, reply, params, fname, ext })
-    return serveCached.call(this, { file, url, mapping, reply })
+    let file = `${this.dir.data}/cache${url}`
+    const handler = assetType === 'zxy' ? 'sumbaProxy:zxyToYxz' : null
+    if (handler) file = `${this.dir.data}/cache${await callHandler(handler, url, params)}`
+    if (!fs.existsSync(file)) return serveFresh.call(this, { file, mapping, reply, params, fname, ext })
+    return serveCached.call(this, { file, mapping, reply })
   }
 }
 

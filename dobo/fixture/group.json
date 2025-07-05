@@ -1,4 +1,5 @@
 [{
+  "assetType": "zxy",
   "code": "osm",
   "name": "OpenStreetMap",
   "status": "ENABLED",

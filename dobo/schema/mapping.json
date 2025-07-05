@@ -1,6 +1,7 @@
 {
   "connection": "memory",
   "properties": [
+    "assetType::20:true",
     "code::50:unique:true",
     "name::50:true",
     {

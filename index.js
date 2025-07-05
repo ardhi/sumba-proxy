@@ -1,3 +1,5 @@
+import path from 'path'
+
 async function factory (pkgName) {
   const me = this
 
@@ -10,7 +12,8 @@ async function factory (pkgName) {
         waibu: {
           title: 'Sumba Proxy',
           prefix: 'spx'
-        }
+        },
+        cachePathHandler: null
       }
     }
 
@@ -18,6 +21,17 @@ async function factory (pkgName) {
       const { randomRange } = this.app.bajoExtra
       const all = pattern.split('')
       return all[randomRange(0, pattern.length - 1)]
+    }
+
+    zxyToYxz = async (url, params, hashPrefix = true) => {
+      const { hash } = this.app.bajoExtra
+      const { isEmpty } = this.lib._
+      let [, prefix] = url.split('/')
+      if (hashPrefix) prefix = await hash(prefix)
+      const [z, x, y] = params
+      const base = path.basename(y)
+      const [fname, ext = ''] = base.split('.')
+      return `/${prefix}/${fname}/${x}/${z}${isEmpty(ext) ? '' : ('.' + ext)}`
     }
   }
 }
