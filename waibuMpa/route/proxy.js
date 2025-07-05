@@ -35,15 +35,18 @@ const proxy = {
     const assetType = mapping.assetType ?? get(mapping, '_rel.group.assetType')
     const cdn = mapping.cdn ?? get(mapping, '_rel.group.cdn')
     if (cdn) {
-      const cdnType = mapping.cdnType ?? get(mapping, '_rel.group.cdnType', 'yxz')
-      let cdnUrl = `${cdn}${url}`
+      const cdnType = mapping.cdnType || get(mapping, '_rel.group.cdnType') || 'yxz'
+      const [,, ...u] = urls
+      let cdnUrl = `${cdn}/${u.join('/')}`
       if (['yxz', 'zxy'].includes(cdnType)) cdnUrl = getTileLocation({ type: cdnType, prefix: cdn, z: params[0], x: params[1], y: fname, format: isEmpty(ext) ? '' : `.${ext}` })
       const resp = await fetchUrl(cdnUrl, { method: 'HEAD' }, { rawResponse: true, cacheBuster: false })
-      if (resp.ok) return reply.redirectTo(url)
+      if (resp.ok) return reply.redirectTo(cdnUrl)
     }
-    let file = `${this.dir.data}/cache${url}`
+    let file = url
     const handler = assetType === 'zxy' ? 'sumbaProxy:zxyToYxz' : null
-    if (handler) file = `${this.dir.data}/cache${await callHandler(handler, url, params)}`
+    if (handler) file = await callHandler(handler, url, params)
+    if (!isEmpty(this.config.assetPrefix)) file = `/${this.config.assetPrefix}-${file.slice(1)}`
+    file = `${this.dir.data}/cache${file}`
     if (!fs.existsSync(file)) return serveFresh.call(this, { file, mapping, reply, params, fname, ext })
     return serveCached.call(this, { file, mapping, reply })
   }

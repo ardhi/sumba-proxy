@@ -13,7 +13,7 @@ async function factory (pkgName) {
           title: 'Sumba Proxy',
           prefix: 'spx'
         },
-        cachePathHandler: null
+        assetPrefix: ''
       }
     }
 
