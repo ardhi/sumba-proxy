@@ -3,11 +3,12 @@ import path from 'path'
 async function factory (pkgName) {
   const me = this
 
-  return class SumbaProxy extends this.lib.Plugin {
+  class SumbaProxy extends this.lib.Plugin {
+    static alias = 'proxy'
+    static dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba', 'bajo-spatial']
+
     constructor () {
       super(pkgName, me.app)
-      this.alias = 'proxy'
-      this.dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba', 'bajo-spatial']
       this.config = {
         waibu: {
           title: 'Sumba Proxy',
@@ -34,6 +35,8 @@ async function factory (pkgName) {
       return `/${prefix}/${fname}/${x}/${z}${isEmpty(ext) ? '' : ('.' + ext)}`
     }
   }
+
+  return SumbaProxy
 }
 
 export default factory
