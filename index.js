@@ -3,7 +3,7 @@ import path from 'path'
 async function factory (pkgName) {
   const me = this
 
-  class SumbaProxy extends this.lib.Plugin {
+  class SumbaProxy extends this.app.pluginClass.base {
     static alias = 'proxy'
     static dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba', 'bajo-spatial']
 
@@ -26,7 +26,7 @@ async function factory (pkgName) {
 
     zxyToYxz = async (url, params, hashPrefix = true) => {
       const { hash } = this.app.bajoExtra
-      const { isEmpty } = this.lib._
+      const { isEmpty } = this.app.lib._
       let [, prefix] = url.split('/')
       if (hashPrefix) prefix = await hash(prefix)
       const [z, x, y] = params

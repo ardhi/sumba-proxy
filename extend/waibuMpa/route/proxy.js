@@ -6,8 +6,8 @@ const proxy = {
   url: '/*',
   method: 'GET',
   handler: async function (req, reply) {
-    const { find, isEmpty, filter, get, last } = this.lib._
-    const { fs, outmatch } = this.lib
+    const { find, isEmpty, filter, get, last } = this.app.lib._
+    const { fs, outmatch } = this.app.lib
     const { getTileLocation } = this.app.bajoSpatial.lib.anekaSpatial
     const { getMemdbStorage, recordGet } = this.app.dobo
     const { fetchUrl } = this.app.bajoExtra
