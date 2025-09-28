@@ -1,8 +1,19 @@
 import path from 'path'
 
+/**
+ * Plugin factory
+ *
+ * @param {string} pkgName - NPM package name
+ * @returns {class}
+ */
 async function factory (pkgName) {
   const me = this
 
+  /**
+   * SumbaProxy class
+   *
+   * @class
+   */
   class SumbaProxy extends this.app.pluginClass.base {
     static alias = 'proxy'
     static dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba', 'bajo-spatial']
