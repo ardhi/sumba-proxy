@@ -1,6 +1,6 @@
 ![Sumba](static/logo.png)
 
-Sumba Biz Suite
+## Sumba Biz Suite
 
 ## Donations
 
