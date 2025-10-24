@@ -6,26 +6,25 @@
     "verbose": true,
     "destination": "./docs",
     "template": "node_modules/clean-jsdoc-theme",
-    "tutorials": "./tutorial",
-    "readme": "../shared/static/home.md",
+    "readme": "./docs/static/home.md",
     "theme_opts": {
       "default_theme": "light",
       "display-module-header": true,
-      "title": "Sumba Proxy",
-      "homepageTitle": "Sumba Proxy",
-      "sections": ["Tutorials", "Classes", "Events", "Modules", "Global"],
+      "title": "SumbaProxy API",
+      "homepageTitle": "SumbaProxy API",
+      "sections": ["Classes", "Events", "Modules", "Global"],
       "menu": [{
-        "title": "Sumba",
-        "link": "https://bajo.app/sumba"
-      }, {
         "title": "NPM",
         "link": "https://npm.rapp.id/-/web/detail/@sumba/proxy"
       }, {
         "title": "Github",
         "link": "https://github.com/ardhi/sumba-proxy"
       }, {
+        "title": "Sumba",
+        "link": "https://sumba.bajo.app/"
+      }, {
         "title": "Bajo",
-        "link": "https://bajo.app"
+        "link": "https://bajo.app/"
       }]
     }
   },
@@ -41,13 +40,6 @@
   "sourceType": "module",
   "templates": {
     "cleverLinks": false,
-    "monospaceLinks": false,
-    "default": {
-      "staticFiles": {
-        "include": [
-          "../shared"
-        ]
-      }
-    }
+    "monospaceLinks": false
   }
 }
