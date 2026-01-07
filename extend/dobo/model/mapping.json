@@ -29,12 +29,9 @@
     "mime,,50",
     "attributes,text"
   ],
-  "feature": {
-    "createdAt": true,
-    "updatedAt": true,
-    "sumba.status": {
-      "values": ["ENABLED", "DISABLED"],
-      "default": "ENABLED"
-    }
-  }
+  "features": ["dobo:createdAt", "dobo:updatedAt", {
+    "name": "sumba:status",
+    "values": ["ENABLED", "DISABLED"],
+    "default": "ENABLED"
+  }]
 }
