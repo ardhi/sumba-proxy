@@ -6,13 +6,16 @@ const proxy = {
   url: '/*',
   method: 'GET',
   handler: async function (req, reply) {
-    const { find, isEmpty, filter, get, last } = this.app.lib._
+    const { find, isEmpty, get, last, importPkg } = this.app.lib._
     const { fs, outmatch } = this.app.lib
-    const { getTileLocation } = this.app.bajoSpatial.lib.anekaSpatial
-    const { getMemdbStorage, recordGet } = this.app.dobo
     const { fetchUrl } = this.app.bajoExtra
     const { callHandler } = this.app.bajo
-    const mappings = filter(getMemdbStorage('ProxyMapping'), { status: 'ENABLED' })
+
+    const anekaSpatial = await importPkg('bajoSpatial:aneka-spatial')
+    const { getTileLocation } = anekaSpatial
+
+    const model = this.app.dobo.getModel('ProxyMapping')
+    const mappings = await model.findAllRecord({ status: 'ENABLED' })
 
     let url = req.url.split('?')[0]
     if (!isEmpty(this.config.waibu.prefix)) url = url.slice(this.config.waibu.prefix.length + 1)
@@ -21,8 +24,8 @@ const proxy = {
       return isMatch(url)
     })
     if (!rec) throw this.error('_notFound', { noContent: true })
-    const mapping = await recordGet('ProxyMapping', rec.id, { rels: ['group'] })
-    if (get(mapping, '_rel.group.status') !== 'ENABLED') throw this.error('_notFound', { noContent: true })
+    const mapping = await model.getRecord(rec.id, { refs: ['group'], throwNotFound: false })
+    if (get(mapping, '_ref.group.status') !== 'ENABLED') throw this.error('_notFound', { noContent: true })
     const items = mapping.local.split('/')
     const urls = url.split('/')
     const params = []
@@ -32,10 +35,10 @@ const proxy = {
     const base = path.basename(last(params))
     const [fname, ext = ''] = base.split('.')
 
-    const assetType = mapping.assetType ?? get(mapping, '_rel.group.assetType')
-    const cdn = mapping.cdn ?? get(mapping, '_rel.group.cdn')
+    const assetType = mapping.assetType ?? get(mapping, '_ref.group.assetType')
+    const cdn = mapping.cdn ?? get(mapping, '_ref.group.cdn')
     if (cdn) {
-      const cdnType = mapping.cdnType || get(mapping, '_rel.group.cdnType') || 'yxz'
+      const cdnType = mapping.cdnType || get(mapping, '_ref.group.cdnType') || 'yxz'
       const [,, ...u] = urls
       let cdnUrl = `${cdn}/${u.join('/')}`
       if (['yxz', 'zxy'].includes(cdnType)) cdnUrl = getTileLocation({ type: cdnType, prefix: cdn, z: params[0], x: params[1], y: fname, format: isEmpty(ext) ? '' : `.${ext}` })
