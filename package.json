@@ -9,7 +9,9 @@
   },
   "type": "module",
   "bajo": {
-    "type": "plugin"
+    "type": "plugin",
+    "alias": "proxy",
+    "dependencies": ["bajo-extra", "waibu-mpa", "dobo", "sumba", "bajo-spatial"]
   },
   "repository": {
     "type": "git",

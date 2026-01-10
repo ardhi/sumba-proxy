@@ -15,9 +15,6 @@ async function factory (pkgName) {
    * @class
    */
   class SumbaProxy extends this.app.baseClass.Base {
-    static alias = 'proxy'
-    static dependencies = ['bajo-extra', 'waibu-mpa', 'dobo', 'sumba', 'bajo-spatial']
-
     constructor () {
       super(pkgName, me.app)
       this.config = {
