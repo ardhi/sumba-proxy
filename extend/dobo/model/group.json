@@ -10,7 +10,6 @@
       "type": "string",
       "maxLength": 20,
       "index": true,
-      "required": true,
       "default": "maptile"
     },
     "maxZoom,smallint",

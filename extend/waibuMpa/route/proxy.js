@@ -1,6 +1,6 @@
 import path from 'path'
-import serveCached from '../../lib/serve-cached.js'
-import serveFresh from '../../lib/serve-fresh.js'
+import serveCached from '../../../lib/serve-cached.js'
+import serveFresh from '../../../lib/serve-fresh.js'
 
 const proxy = {
   url: '/*',
