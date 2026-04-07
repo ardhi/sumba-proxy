@@ -11,7 +11,7 @@
       "ref": {
         "group": {
           "model": "ProxyGroup",
-          "propName": "id",
+          "field": "id",
           "type": "1:1"
         }
       }
